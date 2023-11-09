@@ -1,25 +1,30 @@
-import time
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.by import By
-import pyperclip
-import spacy
+import requests
+from bs4 import BeautifulSoup
 
-# PROCURAR A INFORMAÇÃO NO CHROME
-url = "https://www.uol.com.br/"
+def extrair_texto(link):
+    response_texto = requests.get(link)
+    if response_texto.status_code == 200:
+        content_texto = response.content
+        texto = BeautifulSoup(content, 'html.parser')
+        paragrafos = texto.find_all('p')
+        for paragrafo in paragrafos:
+            print(paragrafo.get_text())
 
-option = Options()
-option.headless = True
-driver = webdriver.Firefox()
-driver.get(url)
-time.sleep(3)
 
-apertar = driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[4]/section[2]/div/div/div[1]/div/div[1]/div/div/div/div/div[1]/div/div[1]/article/a/figure")
-apertar.click()
+response = requests.get('https://www.giromarilia.com.br/secao/cidade/giro-marilia/4/41')
+content = response.content
+site = BeautifulSoup(content, 'html.parser' )
 
-elemento_texto = driver.find_element(By.XPATH, "/html/body/div[1]/main/article/div[1]/div[2]/div/div/div[2]/p[1]")
-texto = elemento_texto.text
-pyperclip.copy(texto)
-driver.quit()
+titulos = site.find_all('h4', class_='card-title')
+links = site.find_all('div', class_ = 'card')
 
-print(texto)
+for i in range(len(titulos)):
+    titulo = titulos[i].get_text()
+    link_tag = links[i].find('a')
+    if link_tag:
+        link = link_tag['href']
+        print(titulo)
+        print()
+        print(link)
+        print()
+        #extrair_texto(link)
