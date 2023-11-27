@@ -27,4 +27,4 @@ for i in range(len(titulos)):
         print()
         print(link)
         print()
-        #extrair_texto(link)
+        extrair_texto(link)
