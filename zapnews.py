@@ -43,7 +43,7 @@ def salvar_noticias_enviadas(noticias):
 # Classe WhatsappBot
 class WhatsappBot:
     def __init__(self):
-        self.grupos = ["testezap"]
+        self.grupos = ["GIRO Marília - Jornal 70"]
         options = webdriver.ChromeOptions()
         options.add_argument('lang=pt-br')
         self.driver = webdriver.Chrome(options=options)
