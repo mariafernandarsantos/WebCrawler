@@ -56,7 +56,7 @@ class WhatsappBot:
         noticias_enviadas = carregar_noticias_enviadas()
 
         for grupo in self.grupos:
-            grupo = self.driver.find_element(by=By.XPATH, value="//span[@title='testezap']")
+            grupo = self.driver.find_element(by=By.XPATH, value="//span[@title='GIRO Marília - Jornal 70']")
                                              
             time.sleep(3)
             grupo.click()
@@ -86,7 +86,7 @@ class WhatsappBot:
 bot = WhatsappBot()
 
 # Agendar a execução do bot para um horário específico
-schedule.every().day.at("13:00").do(bot.enviar_mensagens)
+schedule.every(60).minutes.do(bot.enviar_mensagens)
 
 while True:
     schedule.run_pending()
